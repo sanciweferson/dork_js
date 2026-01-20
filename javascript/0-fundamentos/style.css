@@ -1,0 +1,165 @@
+@import "../../root.css";
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.btn-back {
+  margin-bottom: 1rem;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 500;
+
+       display: flex;         /* layout horizontal */
+  flex-direction: row;
+  align-items: center;           /* alinha verticalmente */
+  justify-content: flex-start;
+                 /* espaço entre seta e texto */
+gap: 2rem;
+  padding: 1rem 0.95rem;
+  border-radius: var(--radius);
+  max-width: 150px;
+
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+
+  border: 1px solid var(--border);
+  text-decoration: none;
+  cursor: pointer;
+
+  line-height: 1;                /* remove influência da baseline */
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.1s ease;
+}
+
+.back-inline {
+  display: flex;          /* coloca lado a lado */
+  align-items: center;   /* alinha verticalmente */
+  gap: 0.4rem;           /* espaço entre ícone e texto */
+}
+
+/* Ícone */
+.back-inline .arrow-icon {
+  width: 2em;
+  height: 2em;
+  display: block;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+/* Texto */
+.back-inline .back-text {
+  text-align: center;
+  margin-left: 3rem;
+  font-size: 1rem;
+  line-height: 1;        /* evita desnível de baseline */
+}
+
+
+/* Hover elegante */
+.btn-back:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+  box-shadow: 0 4px 12px oklch(0.145 0 0 / 0.15);
+  transform: translateY(-1px);
+}
+
+.header { 
+  padding: 1.5rem 2rem;
+}
+.header h1 {
+  margin-top: 1.5rem;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.header span{
+  color: var(--chart-3);
+}
+/* Hover: sutil, elegante */
+.btn-back:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* Active: feedback físico */
+.btn-back:active {
+  transform: translateY(1px);
+}
+
+/* Acessibilidade */
+.btn-back:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+/* ================= BOTÃO VOLTAR AO TOPO ================= */
+
+.back-to-top {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+
+  width: 3rem;
+  height: 3rem;
+
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  cursor: pointer;
+
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s;
+
+  z-index: 1000;
+}
+
+/* Quando ativo (aparece na tela) */
+.back-to-top.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Ícone da seta */
+.arrow-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: currentColor;
+  position: absolute;
+}
+
+/* Anel de progresso */
+.progress-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg); /* começa de cima */
+}
+
+.progress-ring__circle {
+  stroke: var(--chart-3);
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+/* Hover elegante */
+.back-to-top:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+
+

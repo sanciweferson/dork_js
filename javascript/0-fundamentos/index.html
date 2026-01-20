@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Fundamentos do JavaScript</title>
+</head>
+
+<body>
+
+
+  <header class="header">
+    <div >
+      <a href="../../index.html" class="btn-back icon" aria-label="Voltar">
+  <div class="back-inline">
+    <svg class="arrow-icon" viewBox="0 0 612 612" aria-hidden="true">
+      <path d="M612,306C612,137.004,474.995,0,306,0C137.004,0,0,137.004,0,306c0,168.995,137.004,306,306,306
+            C474.995,612,612,474.995,612,306z M328.895,160.511l39.502,39.502L260.239,308.226l117.838,117.838l-39.335,39.335L181.375,308.03
+            L328.895,160.511z" />
+    </svg>
+  
+    <div class="back-text">voltar</div>
+  </div>
+
+      </a>
+    </div>
+
+
+    <h1>Guia de Fundamentos <span>JavaScript</span></h1>
+
+
+  </header>
+
+
+
+
+
+
+  <button class="back-to-top" aria-label="Voltar ao topo">
+    <svg class="progress-ring" width="48" height="48">
+      <circle class="progress-ring__circle" stroke-width="4" fill="transparent" r="20" cx="24" cy="24" />
+    </svg>
+
+    <svg class="arrow-icon" viewBox="0 0 24 24">
+      <path d="M12 5l-7 7h4v7h6v-7h4z" />
+    </svg>
+  </button>
+
+  <script>
+    // ================= BOTÃO VOLTAR AO TOPO =================
+
+    const backToTopBtn = document.querySelector(".back-to-top")
+    const circle = document.querySelector(".progress-ring__circle")
+
+    const radius = circle.r.baseVal.value
+    const circumference = 2 * Math.PI * radius
+
+    // Configura o círculo para animação de progresso
+    circle.style.strokeDasharray = `${circumference} ${circumference}`
+    circle.style.strokeDashoffset = circumference
+
+    function setProgress(percent) {
+      const offset = circumference - (percent / 100) * circumference
+      circle.style.strokeDashoffset = offset
+    }
+
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+
+      const scrollPercent = (scrollTop / docHeight) * 100
+
+      // Atualiza o anel de progresso
+      setProgress(scrollPercent)
+
+      // Mostra o botão depois de descer um pouco
+      if (scrollTop > 300) {
+        backToTopBtn.classList.add("show")
+      } else {
+        backToTopBtn.classList.remove("show")
+      }
+    })
+
+    // Clique → volta suavemente ao topo
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      })
+    })
+
+  </script>
+
+
+  <script type="module">
+
+    import { initTheme } from "/javascript/theme/theme.init.js"
+
+    window.onload = () => {
+      initTheme()
+      // agora vai abrir o menu corretamente se estava aberto antes
+    }
+
+    const darkMode = localStorage.getItem("darkMode");
+    const isDark =
+      darkMode === "true" ||
+      (darkMode === null && window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+    document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
+
+    // Atualiza ícones já na primeira renderização
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".icon-moon").forEach(el => el.classList.toggle("hidden", isDark));
+      document.querySelectorAll(".icon-sun").forEach(el => el.classList.toggle("hidden", !isDark));
+    });
+  </script>
+
+</body>
+
+</html>
